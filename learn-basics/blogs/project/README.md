@@ -27,3 +27,10 @@ cd project  yo
 
 #启动项目：
   gulp   (注意：npm run start，项目不会热跟新)
+
+
+字体库： bower  font-awesome@4
+
+数据库： MongoDB
+
+ json编辑器  ：https://www.json-generator.com

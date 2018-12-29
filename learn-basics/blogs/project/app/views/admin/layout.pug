@@ -1,6 +1,7 @@
 extends ../layout
 
 append css
+  link(rel="stylesheet", href="/bower_components/font-awesome/css/font-awesome.css")
   link(rel="stylesheet", href="/css/dashboard.css")
 
 block content
@@ -13,7 +14,7 @@ block content
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href='/') Node Blog
+          a.navbar-brand(href='/') Node.js 全栈博客系统
         #navbar.navbar-collapse.collapse
           ul.nav.navbar-nav.navbar-right
             li
@@ -21,9 +22,13 @@ block content
             li
               a(href='#') Settings
             li
-              a(href='#') 注销
+              a(href='#')
+                i.fa.fa-lock
+                | &nbsp;注销
             li
-              a(href='#') 帮助
+              a(href='#')
+                i.fa.fa-question
+                | &nbsp;帮助
           form.navbar-form.navbar-right
             input.form-control(type='text', placeholder='Search...')
   .container-fluid
@@ -32,17 +37,26 @@ block content
             ul.nav.nav-sidebar
               li.active
                 a(href='/admin/posts/list')
-                  | 文章列表
+                  i.fa.fa-files-o
+                  | &nbsp;文章列表
                   span.sr-only (current)
               li
-                a(href='/admin/posts/add') 添加文章
+                a(href='/admin/posts/add') 
+                  i.fa.fa-file-o
+                  | &nbsp;添加文章
               li
-                a(href='/admin/categories/list') 分类列表
+                a(href='/admin/categories/list') 
+                  i.fa.fa-th-list
+                  | &nbsp;分类列表
               li
-                a(href='/admin/categories/add') 添加分类
+                a(href='/admin/categories/add') 
+                  i.fa.fa-plus
+                  | &nbsp;添加分类
             ul.nav.nav-sidebar
               li
-                a(href='/admin/users/password') 修改密码
+                a(href='/admin/users/password') 
+                  i.fa.fa-lock
+                  | &nbsp;修改密码
                
         .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
           block main
