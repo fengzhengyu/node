@@ -34,3 +34,10 @@ cd project  yo
 数据库： MongoDB
 
  json编辑器  ：https://www.json-generator.com
+
+
+data.js->随机取数据
+npm install lorem-ipsum
+npm install slug 
+截取字符串 ....
+npm install truncate

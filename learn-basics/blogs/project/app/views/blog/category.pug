@@ -1,7 +1,10 @@
 extends layout
 
 block main
-  h2.page-header NODE 全栈博客开发
+  h2.page-header
+    = category.name
+    | &nbsp;分类下的所有文章&nbsp;
+    = posts.length
   each post in posts
     div.post
       h3.post-title
