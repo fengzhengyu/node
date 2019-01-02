@@ -55,12 +55,62 @@ router.get('/category/:name', (req, res, next) => {
   })
  
 })
+// 文章详情
 
-router.get('/view', (req, res, next) => {
+router.get('/view/:id', (req, res, next) => {
+  if(!req.params.id){
+    return next(new Error('no post id provided'))
+  }
+  Post.findOne({_id:req.params.id})
+  .populate('author')
+  .populate('category')
+  .exec((err,post)=>{
+    if(err){
+      return next(err);
+    }
+    res.render('blog/view',{
+      post:post
+    })
+  })
  
 })
-router.get('/comment', (req, res, next) => {
+// 评论提交
+router.post('/comment/:id', (req, res, next) => {
+  if(!req.body.email){
+    return next(new Error('no email provided for commenter'))
+  }
+  if(!req.body.content){
+    return next(new Error('no content provided for commenter'))
+  }
+  Post.findOne({_id:req.params.id})
+  .exec((err,post)=>{
+    if(err){
+      return next(err);
+    }
+    var comment = {
+      email: req.body.email,
+      content: req.body.content,
+      created: new Date()
+    }
+
+    post.comments.unshift(comment);
+    // push版本冲突   
+    // 解决
+    //newSchema({},{usePushEach: true}) 
+
+    
+    post.markModified('comments');
+    post.save((err,post)=>{
+      console.log(post)
+      if(err){
+        return next(err);
+      }
+      res.redirect('/posts/view/'+post._id)
+    })
+    
+  })
  
+
 
 })
 router.get('/favoutite', (req, res, next) => {

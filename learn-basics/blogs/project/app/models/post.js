@@ -13,7 +13,9 @@ const PostSchema = new Schema({
   published: {type: Boolean,default: false},
   meta: {type: Schema.Types.Mixed},
   comments: [Schema.Types.Mixed],
-  created: {type: Date}
+  created: {type: Date},
+},{
+  usePushEach: true
 });
 
 // ArticleSchema.virtual('date')

@@ -31,26 +31,3 @@ block main
           =post.meta.favourites
         span.post-link
           a(href="/posts/view/"+post._id,target="_blank") 查看全文
-  if pageCount > 1
-    nav
-      ul.pagination
-        li
-          a(href="",aria-label="Previous")
-            span(aria-hidden="true") &laquo;
-        - var curPage = 1;
-        while curPage <= pageCount
-          if (curPage == pageNum)
-            li.active
-              a(href="/posts?page="+curPage)= curPage++       
-          else
-            li
-              a(href="/posts?page="+curPage)= curPage++         
-        li
-          a(href="",aria-label="Nexts")
-            span(aria-hidden="true") &raquo;
-
-
-
-      
-//- block scripts    
-//-   script $(function(){console.log('dom');  })
