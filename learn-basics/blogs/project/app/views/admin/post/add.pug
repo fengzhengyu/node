@@ -2,3 +2,25 @@ extends ../layout
 
 block main
   h2.page-header= title
+  form.vertical-form(action="/admin/posts/add", method="post")
+    div.form-group
+      label(for="title") 标题
+      input.form-control.input-lg(name="title",placeholder="请输入标题...",required="true")
+    div.form-group
+      label(for="category") 分类
+      select.form-control.input-lg(name="category" required="true")
+        option(value="",) -选择分类-
+        each item in categories
+          option(value=item._id)= item.name
+
+    div.form-group 
+      label(for="content") 内容
+      script#editor(type="text/plain" ,required="true" ,name="content", style="width:100%;height: 300px;")
+  
+    button.btn.btn-info(type="submit") 发布
+
+block scripts    
+
+  script(src="/ueditor/ueditor.config.js")
+  script(src="/ueditor/ueditor.all.min.js")
+  script(src='/js/admin/post.js')

@@ -4,6 +4,10 @@ const mongoose = require('mongoose');
 const Post = mongoose.model('Post');
 const User = mongoose.model('User');
 const category = mongoose.model('Category');
+
+const slug = require('slug');
+
+
 module.exports = (app) => {
   app.use('/admin/posts', router);
 };
@@ -70,7 +74,7 @@ router.get('/', (req, res, next) => {
   
 });
 
-//后台文章编辑
+//后台文章添加
 
 router.get('/add', (req, res, next) => {
  
@@ -81,41 +85,44 @@ router.get('/add', (req, res, next) => {
  
 })
 //后台文章编辑提交
-router.post('/edit/:id', (req, res, next) => {
-  if(!req.body.email){
-    return next(new Error('no email provided for commenter'))
-  }
-  if(!req.body.content){
-    return next(new Error('no content provided for commenter'))
-  }
-  Post.findOne({_id:req.params.id})
-  .exec((err,post)=>{
+router.post('/add', (req, res, next) => {
+  
+  var title = req.body.title,
+  category = req.body.category
+  content = req.body.content;
+
+
+  User.findOne((err,author)=>{
+   
     if(err){
       return next(err);
     }
-    var comment = {
-      email: req.body.email,
-      content: req.body.content,
+    var post  = new Post({
+      title: title,
+      slug: slug(title),
+      category: category,
+      content: content,
+      author: author,
+      published: true,
+      meta: {favourites:0},
+      comments: [],
       created: new Date()
-    }
+     
+    });
+   
 
-    post.comments.unshift(comment);
-    // push版本冲突   
-    // 解决
-    //newSchema({},{usePushEach: true}) 
-
-    
-    post.markModified('comments');
-    post.save((err,post)=>{
-      console.log(post)
+    post.save((err,doc)=>{
       if(err){
-        return next(err);
+        console.log(err)
+        res.redirect('/admin/posts/add')
+        // return next(err);
       }
-      res.redirect('/posts/view/'+post._id)
+      res.redirect('/admin/posts')
     })
-    
+
+
   })
- 
+  
 
 
 })

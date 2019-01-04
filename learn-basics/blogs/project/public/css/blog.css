@@ -175,10 +175,12 @@ h6, .h6 {
   text-align: center;
 }
 .post-content {
-  text-indent: 2em;
+  /* text-indent: 2em; */
   text-align: justify;
 }
-
+.post-content  img{
+  width: 100%;
+}
 
 /*
  * Footer
